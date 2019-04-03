@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package cn.sagacloud.proto;
+option optimize_for = SPEED;
+//option java_package = "cn.sagacloud.server.proto";
+option java_outer_classname = "MessageProto";
+//message Message{
+//    int32 cmd = 1;
+//    string className = 2;
+//    string content = 3;
+//}
+
+message Message{
+    string cmd = 1;
+    int32 taskId = 2;
+    string content = 3;
+}

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="TaskDatabase" default-lazy="false"
+                   namespace="TaskDatabase.Model">
+
+  <!-- more mapping info here -->
+  <class name="TaskModel" table="task" entity-name="TaskModel">
+    <id name="Tid">
+      <!--<generator class="guid" />-->
+      <generator class="native" />
+      <!--  <generator class="native" />主键自增。使用数据库自带的生成器 -->
+    </id>
+    <property name="Id" />
+    <property name="Task_name"/>
+    <property name="Task_cmd" update="false" />
+    <property name="Task_param" update="false"/>
+    <property name="Task_status"/>
+    <property name="Task_result_json" />
+    <property name="Task_expected_finish_time"  update="false"/>
+    <property name="Task_add_time" insert="false" update="false"/>
+    <set name="DownloadTaskModelList">
+      <key column="Task_id" property-ref="Id"/>
+      <one-to-many class="DownloadTaskModel"/>
+    </set>
+  </class>
+
+  <class name="DownloadTaskModel" table="download">
+    <id name="Tid">
+      <!--<generator class="guid" />-->
+      <generator class="native" />
+      <!--  <generator class="native" />主键自增。使用数据库自带的生成器 -->
+    </id>
+    <property name="Id" />
+    <property name="Task_id" >
+      <!--<many-to-one class="DownloadTaskModel" column="Task_Id"/>-->
+    </property>
+    <property name="Task_url" />
+    <property name="Task_md5" />
+    <property name="Local_dir" />
+    <property name="Downloaded_bytes" />
+    <property name="File_bytes" />
+    <property name="Finish_time" />
+  </class>
+</hibernate-mapping>
