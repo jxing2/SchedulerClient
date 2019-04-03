@@ -190,8 +190,13 @@ namespace TaskDatabase
                                 .Add(Restrictions.Le("Task_status", -1))
                                 .List<TaskModel>();
                         for (int i = 0; i < queryResult.Count; ++i) {
+                            ICollection<DownloadTaskModel> downloadTaskModels = queryResult[i].DownloadTaskModelList;
+                            for (int j = 0; j < downloadTaskModels.Count; ++j) {
+                                session.Delete(downloadTaskModels.ElementAt(j));
+                            }
                             session.Delete(queryResult[i]);
                         }
+                        session.Flush();
                     }
                 }
             }
